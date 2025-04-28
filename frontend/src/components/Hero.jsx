@@ -1,14 +1,42 @@
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import TasksList from './TasksList.jsx';  // Assuming TasksList is in the same folder
 import AddTaskButton from './AddTaskButton.jsx';  // Assuming AddTaskButton is in the same folder
+import Loader from './Loader.jsx';  // Assuming Loader is in the same folder
+import { Link } from 'react-router-dom';
 
 function Hero() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [loadingTasks, setLoadingTasks] = useState(true);  // State to track task loading
+  const [tasks, setTasks] = useState([]);  // State to store tasks
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setUserLoggedIn(!!token);
   }, []);
+
+  // Function to fetch tasks from an API or database
+  const fetchTasks = async () => {
+    try {
+      // Replace the URL with your actual API endpoint
+      const response = await fetch('/api/tasks', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      setTasks(data);  // Store the fetched tasks
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+    } finally {
+      setLoadingTasks(false);  // Set loading to false after fetching tasks
+    }
+  };
+
+  useEffect(() => {
+    if (userLoggedIn) {
+      fetchTasks();  // Fetch tasks when the user is logged in
+    }
+  }, [userLoggedIn]);
 
   if (userLoggedIn) {
     return (
@@ -19,10 +47,17 @@ function Hero() {
         <p className="text-white/70 text-lg mb-8">
           Manage your tasks and stay ahead of your goals.
         </p>
+        
         {/* Add Task Button placed strategically */}
         <AddTaskButton />
         
-        {/* Optional: You can add TaskList, TaskStats, etc. below if needed */}
+        {/* Conditionally render Loader while tasks are being loaded */}
+        {loadingTasks ? (
+          <Loader />  // Show Loader while loading
+        ) : (
+          <TasksList tasks={tasks} />  // Show tasks after loading is complete
+        )}
+        
       </section>
     );
   }

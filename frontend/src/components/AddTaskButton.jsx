@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AddTaskButton() {
@@ -9,6 +9,12 @@ function AddTaskButton() {
   const [priority, setPriority] = useState('Medium');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token); // set true if token exists
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +55,11 @@ function AddTaskButton() {
       setLoading(false);
     }
   };
+
+  if (!isLoggedIn) {
+    // If user is not logged in, don't render anything
+    return null;
+  }
 
   return (
     <div>
