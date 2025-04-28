@@ -32,9 +32,9 @@ cd task-management/backend
 npm install
 
 # contact me for .env file
-PORT=8001
-MONGO_URI=your_mongodb_connection_string 
-JWT_SECRET=your_jwt_secret_key
+PORT = 8001
+MONGODB_URI = mongodb+srv://arnavraj2701:LSZx6M4GOHzT0Znu@cluster0.3gn0nji.mongodb.net
+JWT_SECRET_KEY = kaamkrokaam_warna_kch_na_hove
 
 
 npm start
