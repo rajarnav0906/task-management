@@ -3,6 +3,7 @@ import TasksList from './TasksList.jsx';  // Assuming TasksList is in the same f
 import AddTaskButton from './AddTaskButton.jsx';  // Assuming AddTaskButton is in the same folder
 import Loader from './Loader.jsx';  // Assuming Loader is in the same folder
 import { Link } from 'react-router-dom';
+import TaskStats from './TaskStats.jsx';
 
 function Hero() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -50,6 +51,8 @@ function Hero() {
         
         {/* Add Task Button placed strategically */}
         <AddTaskButton />
+
+        <TaskStats />
         
         {/* Conditionally render Loader while tasks are being loaded */}
         {loadingTasks ? (

@@ -20,16 +20,16 @@ function AddTaskButton() {
     e.preventDefault();
     setLoading(true);
     setMessage('');
-
+  
     try {
       const token = localStorage.getItem('token');
-
+  
       if (!token) {
         setMessage('User not authenticated. Please log in.');
         setLoading(false);
         return;
       }
-
+  
       const response = await axios.post(
         "http://localhost:8001/api/v1/add-task",
         { title, description, status, priority },
@@ -39,7 +39,7 @@ function AddTaskButton() {
           },
         }
       );
-
+  
       if (response.status === 201) {
         setMessage('✅ Task added successfully!');
         setTitle('');
@@ -47,6 +47,9 @@ function AddTaskButton() {
         setStatus('active');
         setPriority('Medium');
         setShowForm(false);
+  
+        // Reload the page to refresh the task list
+        window.location.reload();
       }
     } catch (error) {
       console.error(error);
@@ -55,6 +58,7 @@ function AddTaskButton() {
       setLoading(false);
     }
   };
+  
 
   if (!isLoggedIn) {
     // If user is not logged in, don't render anything

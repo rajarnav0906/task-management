@@ -45,16 +45,22 @@ router.get("/get-all-tasks", authenticateToken, async (req, res) => {
 router.put("/update-task/:id", authenticateToken, async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
-    
+
     if (!task) return res.status(404).json({ message: "Task not found" });
 
     // Ensure that the task belongs to the authenticated user
     if (task.userId.toString() !== req.user.id)
       return res.status(401).json({ message: "Not authorized" });
 
-    // Update task status and priority
-    task.status = req.body.status || task.status;
-    task.priority = req.body.priority || task.priority;
+    // Toggle task status between "completed" and "active"
+    if (req.body.status) {
+      task.status = req.body.status === 'completed' ? 'completed' : 'active';
+    }
+
+    // Update priority if provided
+    if (req.body.priority) {
+      task.priority = req.body.priority;
+    }
 
     const updatedTask = await task.save();
     
@@ -64,6 +70,7 @@ router.put("/update-task/:id", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
 
 // Delete Task
 router.delete("/delete-task/:id", authenticateToken, async (req, res) => {
@@ -88,7 +95,7 @@ router.delete("/delete-task/:id", authenticateToken, async (req, res) => {
 router.get("/get-task-stats", authenticateToken, async (req, res) => {
   try {
     const tasks = await Task.find({ userId: req.user.id });
-    
+
     // Calculate stats
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter(task => task.status === "completed").length;
@@ -108,6 +115,7 @@ router.get("/get-task-stats", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
 
 
 export default router;
