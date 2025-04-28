@@ -45,14 +45,19 @@ function Hero() {
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#b6d07a]">
           Welcome Back! 🚀
         </h1>
-        <p className="text-white/70 text-lg mb-8">
+        <p className="text-white/70 text-lg mb-12">
           Manage your tasks and stay ahead of your goals.
         </p>
         
         {/* Add Task Button placed strategically */}
-        <AddTaskButton />
+        <div className="mb-8">
+          <AddTaskButton />
+        </div>
 
-        <TaskStats />
+        {/* Task Stats */}
+        <div className="mb-8 w-full max-w-4xl">
+          <TaskStats />
+        </div>
         
         {/* Conditionally render Loader while tasks are being loaded */}
         {loadingTasks ? (
@@ -72,7 +77,7 @@ function Hero() {
         <br /> Your Goals. <span className="text-[#b6d07a]">Achieved.</span>
       </h1>
 
-      <p className="text-white/70 text-lg max-w-2xl mb-10">
+      <p className="text-white/70 text-lg max-w-2xl mb-12">
         Stay focused and productive with our powerful, minimalistic task manager.  
         Simple to use, yet powerful enough to handle all your goals.
       </p>
@@ -82,7 +87,7 @@ function Hero() {
         <AddTaskButton />
       </div>
 
-      <div className="flex space-x-4 mb-16">
+      <div className="flex space-x-4 mb-12">
         <Link
           to="/signup"
           className="px-8 py-4 bg-[#6552D0] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-200 text-lg"
@@ -97,7 +102,7 @@ function Hero() {
         </Link>
       </div>
 
-      <section className="grid md:grid-cols-3 gap-8 max-w-6xl w-full mt-10">
+      <section className="grid md:grid-cols-3 gap-8 max-w-6xl w-full mt-12">
         {/* Feature 1 */}
         <div className="bg-[#1f2a4d] rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all">
           <h2 className="text-2xl font-semibold mb-4 text-[#b6d07a]">Fast Task Creation</h2>

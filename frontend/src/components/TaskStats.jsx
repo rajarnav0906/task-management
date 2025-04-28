@@ -31,30 +31,47 @@ const TaskStats = () => {
   }, []);
 
   return (
-    <div className="bg-[#1f2a4d] p-8 rounded-xl shadow-lg">
+    <div className="bg-[#1f2a4d] p-6 rounded-xl shadow-lg">
       {loading ? (
         <p>Loading stats...</p>
       ) : (
         <div className="text-white">
-          <h2 className="text-xl font-bold text-center text-[#b6d07a] mb-4">Task Statistics</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="stat-item">
-              <p className="text-lg">Total Tasks</p>
-              <h3 className="text-2xl font-bold">{stats.totalTasks}</h3>
-            </div>
-            <div className="stat-item">
-              <p className="text-lg">Completed Tasks</p>
-              <h3 className="text-2xl font-bold text-green-500">{stats.completedTasks}</h3>
-            </div>
-            <div className="stat-item">
-              <p className="text-lg">Active Tasks</p>
-              <h3 className="text-2xl font-bold text-yellow-500">{stats.pendingTasks}</h3>
-            </div>
-            <div className="stat-item">
-              <p className="text-lg">High Priority Tasks</p>
-              <h3 className="text-2xl font-bold text-red-500">{stats.highPriorityTasks}</h3>
-            </div>
-          </div>
+          <h2 className="text-xl font-semibold text-center text-[#b6d07a] mb-6">Task Statistics</h2>
+          
+          {/* Table Container */}
+          <table className="w-full table-auto text-white">
+            <thead>
+              <tr className="border-b border-[#b6d07a]">
+                <th className="py-2 px-4 text-left">Category</th>
+                <th className="py-2 px-4 text-left">Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Total Tasks */}
+              <tr className="border-b border-[#b6d07a]">
+                <td className="py-2 px-4">Total Tasks</td>
+                <td className="py-2 px-4 text-center">{stats.totalTasks}</td>
+              </tr>
+
+              {/* Completed Tasks */}
+              <tr className="border-b border-[#b6d07a]">
+                <td className="py-2 px-4">Completed Tasks</td>
+                <td className="py-2 px-4 text-center text-green-500">{stats.completedTasks}</td>
+              </tr>
+
+              {/* Pending Tasks */}
+              <tr className="border-b border-[#b6d07a]">
+                <td className="py-2 px-4">Active Tasks</td>
+                <td className="py-2 px-4 text-center text-yellow-500">{stats.pendingTasks}</td>
+              </tr>
+
+              {/* High Priority Tasks */}
+              <tr className="border-b border-[#b6d07a]">
+                <td className="py-2 px-4">High Priority Tasks</td>
+                <td className="py-2 px-4 text-center text-red-500">{stats.highPriorityTasks}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       )}
     </div>
