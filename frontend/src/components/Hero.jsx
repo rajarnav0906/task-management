@@ -1,43 +1,49 @@
 import { useState, useEffect } from 'react';
-import TasksList from './TasksList.jsx';  // Assuming TasksList is in the same folder
-import AddTaskButton from './AddTaskButton.jsx';  // Assuming AddTaskButton is in the same folder
-import Loader from './Loader.jsx';  // Assuming Loader is in the same folder
+import axios from 'axios';
+import TasksList from './TasksList.jsx'; 
+import AddTaskButton from './AddTaskButton.jsx';
+import Loader from './Loader.jsx'; 
 import { Link } from 'react-router-dom';
 import TaskStats from './TaskStats.jsx';
 
 function Hero() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
-  const [loadingTasks, setLoadingTasks] = useState(true);  // State to track task loading
-  const [tasks, setTasks] = useState([]);  // State to store tasks
+  const [loadingTasks, setLoadingTasks] = useState(true); 
+  const [loadingAuth, setLoadingAuth] = useState(true); 
+  const [tasks, setTasks] = useState([]); 
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setUserLoggedIn(!!token);
+    setLoadingAuth(false);  
   }, []);
 
-  // Function to fetch tasks from an API or database
+  // Function to fetch tasks from an API using axios
   const fetchTasks = async () => {
     try {
-      // Replace the URL with your actual API endpoint
-      const response = await fetch('/api/tasks', {
+      const response = await axios.get('/api/tasks', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-      const data = await response.json();
-      setTasks(data);  // Store the fetched tasks
+      setTasks(response.data);  
     } catch (error) {
       console.error('Error fetching tasks:', error);
     } finally {
-      setLoadingTasks(false);  // Set loading to false after fetching tasks
+      setLoadingTasks(false);  
     }
   };
 
   useEffect(() => {
     if (userLoggedIn) {
-      fetchTasks();  // Fetch tasks when the user is logged in
+      fetchTasks();  
     }
   }, [userLoggedIn]);
+
+  if (loadingAuth) {
+  
+    return <Loader />;
+  }
 
   if (userLoggedIn) {
     return (
@@ -61,9 +67,9 @@ function Hero() {
         
         {/* Conditionally render Loader while tasks are being loaded */}
         {loadingTasks ? (
-          <Loader />  // Show Loader while loading
+          <Loader /> 
         ) : (
-          <TasksList tasks={tasks} />  // Show tasks after loading is complete
+          <TasksList tasks={tasks} /> 
         )}
         
       </section>

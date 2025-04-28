@@ -13,7 +13,7 @@ function AddTaskButton() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token); // set true if token exists
+    setIsLoggedIn(!!token); 
   }, []);
 
   const handleSubmit = async (e) => {
@@ -61,7 +61,7 @@ function AddTaskButton() {
   
 
   if (!isLoggedIn) {
-    // If user is not logged in, don't render anything
+    
     return null;
   }
 

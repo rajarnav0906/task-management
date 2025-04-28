@@ -6,7 +6,8 @@ import Login from './pages/Login.jsx';
 import Signup from './pages/SignUp.jsx';
 import Tasks from './pages/Tasks.jsx';
 import PrivateRoute from './pages/PrivateRoute.jsx';
-import Loader from './components/Loader.jsx'; // Import the loader component
+import Loader from './components/Loader'; // Import the loader component
+import Footer from './components/Footer'; // Import the footer component
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -38,6 +39,7 @@ function App() {
           element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Tasks />} />} 
         />
       </Routes>
+      <Footer /> {/* Display footer always */}
     </>
   );
 }

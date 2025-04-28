@@ -7,8 +7,8 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false); // Loading state for the submit button
-  const navigate = useNavigate(); // For navigation after signup
+  const [loading, setLoading] = useState(false); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ function Signup() {
       return;
     }
 
-    setLoading(true); // Show loading indicator while sending request
+    setLoading(true); 
 
     // Sending POST request to the backend
     try {
@@ -42,8 +42,8 @@ function Signup() {
         navigate('/login');
       }
     } catch (error) {
-      setLoading(false); // Stop loading if an error occurs
-      // Handle error from the backend (email already exists, etc.)
+      setLoading(false); 
+
       if (error.response) {
         setErrorMessage(error.response.data.message);
       } else {

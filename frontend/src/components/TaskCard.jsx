@@ -65,7 +65,7 @@ const TaskCard = ({ task }) => {
     <div className="bg-[#1f2a4d] rounded-lg overflow-hidden shadow-xl border border-[#2d3c66] hover:shadow-2xl transition-all">
       {/* Header Section with Title */}
       <div className="bg-[#283862] py-3 px-6 border-b border-[#374a7c]">
-        <h3 className="text-xl font-bold text-[#b6d07a]">{task.title}</h3>
+        <h3 className="text-xl font-bold text-[#b6d07a] uppercase">{task.title}</h3>
       </div>
       
       {/* Body Section */}

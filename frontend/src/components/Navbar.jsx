@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { authActions } from '../store/auth.jsx'; 
 import { FiMenu, FiX } from 'react-icons/fi';
-import { Link as ScrollLink } from 'react-scroll';  // Importing ScrollLink
+import { Link as ScrollLink } from 'react-scroll'; 
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,10 +36,10 @@ function Navbar() {
 
           {isLoggedIn && (
             <ScrollLink
-              to="taskList"  // The ID of your TaskList component
+              to="taskList" 
               smooth={true}
-              offset={-50}  // Adjusts the scroll position (optional)
-              duration={500}  // Scroll duration in ms
+              offset={-50}  
+              duration={500}  
               className="text-white hover:text-[#6552D0] transition-colors duration-200 cursor-pointer"  // Added cursor-pointer
             >
               My Tasks
@@ -75,11 +75,11 @@ function Navbar() {
 
           {isLoggedIn && (
             <ScrollLink
-              to="taskList"  // The ID of your TaskList component
+              to="taskList"  
               smooth={true}
               offset={-50}
               duration={500}
-              onClick={toggleMenu}  // Close the mobile menu when clicked
+              onClick={toggleMenu} 
               className="text-white hover:text-[#6552D0] transition-colors duration-200 cursor-pointer"  // Added cursor-pointer
             >
               My Tasks

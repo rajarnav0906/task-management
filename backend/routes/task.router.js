@@ -99,7 +99,7 @@ router.get("/get-task-stats", authenticateToken, async (req, res) => {
     // Calculate stats
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter(task => task.status === "completed").length;
-    const pendingTasks = tasks.filter(task => task.status === "pending").length;
+    const pendingTasks = tasks.filter(task => task.status === "active").length; // Change "pending" to "active"
     const highPriorityTasks = tasks.filter(task => task.priority === "high").length;
 
     const stats = {
@@ -115,6 +115,7 @@ router.get("/get-task-stats", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
 
 
 

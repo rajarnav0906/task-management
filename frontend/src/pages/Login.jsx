@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { authActions } from '../store/auth.jsx'; // Corrected import path
+import { authActions } from '../store/auth.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,9 +8,9 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false); // Loading state for the button
+  const [loading, setLoading] = useState(false); 
   const dispatch = useDispatch();
-  const navigate = useNavigate();  // To redirect after login
+  const navigate = useNavigate();  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ function Login() {
       return;
     }
 
-    setLoading(true);  // Set loading to true when the form is being submitted
+    setLoading(true); 
 
     try {
       // API call to backend for login
@@ -45,16 +45,16 @@ function Login() {
       }));
 
       console.log("Login Successful!", response.data);
-      setLoading(false); // Stop loading once login is successful
+      setLoading(false); 
 
-      navigate('/');  // Redirect to home page after successful login
+      navigate('/'); 
     } catch (error) {
-      setLoading(false); // Stop loading if an error occurs
+      setLoading(false);
       console.error("Login error:", error.response?.data?.message || error.message);
       
-      // Handle specific error cases (e.g., wrong password)
+   
       if (error.response?.data?.message) {
-        setErrorMessage(error.response.data.message); // Show specific error message from server
+        setErrorMessage(error.response.data.message);
       } else {
         setErrorMessage('Something went wrong. Please try again later.');
       }
@@ -101,7 +101,7 @@ function Login() {
           <button
             type="submit"
             className="w-full bg-[#6552D0] text-white py-3 rounded-md hover:opacity-90 transition-all duration-200"
-            disabled={loading} // Disable button when loading
+            disabled={loading}
           >
             {loading ? 'Logging In...' : 'Login'}
           </button>
